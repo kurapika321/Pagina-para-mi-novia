@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para mi persona favorita ❤️</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="petals-container"></div>
+
+    <nav class="tab-bar">
+        <button class="tab-btn active" onclick="cambiarSeccion('principal', event)">🏠 Inicio</button>
+        <button class="tab-btn" onclick="cambiarSeccion('galeria', event)">📸 Galería</button>
+        <button class="tab-btn" id="btn-admin-tab" style="display: none;" onclick="cambiarSeccion('admin', event)">⚙️ Admin</button>
+    </nav>
+
+    <div class="main-wrapper">
+        
+        <section id="vista-principal" class="seccion-vista active">
+            <header>
+                <h1>Para mi persona favorita ❤️</h1>
+                <div class="contador-container">
+                    <div id="contador">Calculando nuestro tiempo...</div>
+                    <div id="mensaje-personalizado" class="burbuja-mensaje">Cargando mensaje...</div>
+                </div>
+            </header>
+
+            <div class="carta-container">
+                <div class="header-carta">
+                    <h2>Mi Carta</h2>
+                    <button id="btn-lectura" class="btn-toggle" onclick="toggleModoLectura()">🌙 Modo Lectura</button>
+                </div>
+                <div class="divider"></div>
+                <p id="texto-carta">Leyendo nuestra historia...</p>
+            </div>
+        </section>
+
+        <section id="vista-galeria" class="seccion-vista">
+            <h2>Nuestros Momentos</h2>
+            
+            <div class="upload-zone">
+                <p>¿Tienes un nuevo recuerdo? ✨</p>
+                <input type="file" id="input-foto" accept="image/*" class="custom-file-input">
+                <button onclick="subirFoto()" class="btn-admin">Subir a la Galería</button>
+            </div>
+
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list" id="carrusel-fotos">
+                        </ul>
+                </div>
+            </div>
+
+            <div id="collage" class="collage">
+                </div>
+        </section>
+
+        <section id="vista-admin" class="seccion-vista">
+            <h3>Configuración de Textos</h3>
+            <div class="admin-card">
+                <label>Editar la Carta:</label>
+                <textarea id="nueva-carta" placeholder="Escribe aquí..."></textarea>
+                
+                <label>Mensaje Corto (Burbuja):</label>
+                <input type="text" id="nuevo-mensaje" placeholder="Ej: Eres mi vida entera">
+                
+                <button onclick="actualizarTodo()" class="btn-admin">Guardar Cambios</button>
+            </div>
+        </section>
+
+        <div id="admin-trigger" onclick="validarAcceso()">✨</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
