@@ -1,0 +1,144 @@
+/* Variables de Diseño Refinado */
+:root {
+    --color-primario: #ff4d6d;
+    --color-secundario: #ff85a1;
+    --color-fondo: #fffafb;
+    --color-texto: #5a5a5a;
+    --fuente-carta: 'Dancing Script', cursive;
+    --fuente-general: 'Quicksand', sans-serif;
+    --shadow-soft: 0 10px 30px rgba(255, 77, 109, 0.1);
+    --transicion: all 0.4s ease;
+}
+
+body { 
+    font-family: var(--fuente-general); 
+    background-color: var(--color-fondo); 
+    color: var(--color-texto);
+    margin: 0; padding: 0;
+    overflow-x: hidden;
+}
+
+.main-wrapper { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 20px 20px 100px 20px; 
+}
+
+/* 1. EFECTO DE PÉTALOS */
+#petals-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    background-color: #ffb7c5;
+    border-radius: 150% 0 150% 0;
+    opacity: 0.6;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* 2. NAVEGACIÓN (TAB BAR) */
+.tab-bar {
+    position: fixed;
+    bottom: 0; left: 0;
+    width: 100%; background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: space-around;
+    padding: 12px 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.tab-btn {
+    background: none; border: none;
+    font-family: var(--fuente-general);
+    font-weight: 700; color: #b0b0b0;
+    cursor: pointer; transition: 0.3s;
+}
+
+.tab-btn.active { color: var(--color-primario); transform: scale(1.1); }
+
+/* 3. VISTAS */
+.seccion-vista { display: none; animation: fadeIn 0.5s ease; }
+.seccion-vista.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* 4. AJUSTE DE IMÁGENES (FORMATO COMPLETO) */
+.splide__slide img { 
+    width: 100%; 
+    height: 400px; 
+    object-fit: contain; /* Foto completa sin recortes */
+    background: rgba(0,0,0,0.03); /* Fondo sutil para rellenar espacios */
+    border-radius: 20px;
+}
+
+.collage { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+.foto-frame {
+    background: white; padding: 10px 10px 35px 10px;
+    border-radius: 12px; box-shadow: var(--shadow-soft);
+    position: relative;
+}
+
+.collage img { 
+    width: 100%; 
+    height: 180px; 
+    object-fit: contain; /* Foto completa en el collage */
+    background: #fdfdfd;
+    border-radius: 8px;
+}
+
+/* 5. ZONA DE SUBIDA (PARA ELLA) */
+.upload-zone {
+    background: white; padding: 25px;
+    border-radius: 25px; margin-bottom: 30px;
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    border: 2px dashed #ffe5ec;
+}
+
+/* 6. BOTÓN ELIMINAR (SOLO ADMIN) */
+.btn-eliminar {
+    position: absolute;
+    top: -10px; right: -10px;
+    background: var(--color-primario);
+    color: white; border: none;
+    border-radius: 50%; width: 28px; height: 28px;
+    font-weight: bold; cursor: pointer;
+    z-index: 10;
+}
+
+/* 7. CARTA Y OTROS */
+.carta-container {
+    background: white; padding: 35px;
+    border-radius: 25px; box-shadow: var(--shadow-soft);
+    border-left: 10px solid var(--color-primario);
+}
+
+#texto-carta { font-family: var(--fuente-carta); font-size: 1.8rem; line-height: 1.6; }
+
+.btn-admin {
+    background: var(--color-primario); color: white;
+    border: none; padding: 12px 25px; border-radius: 15px;
+    font-weight: 700; cursor: pointer; width: 100%;
+}
+
+#admin-trigger { position: fixed; top: 15px; right: 15px; opacity: 0.2; z-index: 2000; cursor: pointer; }
+
+/* Móvil */
+@media (max-width: 600px) {
+    .splide__slide img { height: 280px; }
+    .collage img { height: 150px; }
+    #texto-carta { font-size: 1.6rem; }
+}
